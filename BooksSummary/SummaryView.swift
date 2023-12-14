@@ -53,6 +53,29 @@ struct SummaryView: View {
                 tapAction: { viewStore.send(.speedTapped, animation: nil) }
             )
             
+            ControlsView(
+                viewStore: viewStore
+            )
+            
+            Toggle(
+                "",
+                isOn: viewStore.binding(get: \.isAudioMode, send: .modeTapped)
+            )
+            .toggleStyle(SummaryModeToggleStyle())
+            
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.horizontal)
+        .padding(.vertical, 30)
+        .background(
+            Color.milkBackground
+        )
+    }
+    
+    struct ControlsView: View {
+        let viewStore: ViewStoreType
+        
+        var body: some View {
             HStack(spacing: 20) {
                 PlayerControlButton("backward.end.fill", size: 26) {
                     viewStore.send(.prevKeyPoint)
@@ -74,20 +97,7 @@ struct SummaryView: View {
                     viewStore.send(.nextKeyPoint)
                 }
             }
-            
-            Toggle(
-                "",
-                isOn: viewStore.binding(get: \.isAudioMode, send: .modeTapped)
-            )
-            .toggleStyle(SummaryModeToggleStyle())
-            
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.horizontal)
-        .padding(.vertical, 30)
-        .background(
-            Color.milkBackground
-        )
     }
     
     struct SpeedButton: View {
@@ -147,7 +157,7 @@ struct Fake {
         .init(
             coverPath: "https://",
             keyPoints: [.init(shortText: "The number of the chapter is one. This chapter is perfect.", audioPath: "https://"),
-                        .init(shortText: "The number of the chapter is two. This chapter is the center of the book. Something intresting you can find there.", audioPath: "https://"),
+                        .init(shortText: "The number of the chapter is two. This chapter is the center of the book. Something intresting you can find here.", audioPath: "https://"),
                         .init(shortText: "The number of the chapter is three. It's Briliant!", audioPath: "https://"),
                        ]
         )
