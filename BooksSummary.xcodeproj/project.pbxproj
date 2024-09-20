@@ -15,6 +15,14 @@
 		8C65F4FC2B2872A7004FB8A0 /* Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65F4FB2B2872A7004FB8A0 /* Summary.swift */; };
 		8C65F4FE2B287C9E004FB8A0 /* SummaryModeToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65F4FD2B287C9E004FB8A0 /* SummaryModeToggleStyle.swift */; };
 		8C65F5002B287FA5004FB8A0 /* SummarySliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65F4FF2B287FA5004FB8A0 /* SummarySliderView.swift */; };
+		C59C110D2C9D52A200B80EE4 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C110C2C9D529F00B80EE4 /* Book.swift */; };
+		C59C110F2C9D546E00B80EE4 /* MediaControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C110E2C9D546E00B80EE4 /* MediaControlsView.swift */; };
+		C59C11112C9D5B3600B80EE4 /* MediaPlayerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C11102C9D5B3600B80EE4 /* MediaPlayerClient.swift */; };
+		C59C11132C9DB6E900B80EE4 /* SummaryAudioControlsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C11122C9DB6E900B80EE4 /* SummaryAudioControlsFeature.swift */; };
+		C59C11182C9DCC2F00B80EE4 /* SummaryAudioControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C11172C9DCC2F00B80EE4 /* SummaryAudioControlsView.swift */; };
+		C59C111D2C9DCD3700B80EE4 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C111C2C9DCD3700B80EE4 /* SliderView.swift */; };
+		C59C11212C9DCEA400B80EE4 /* CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C11202C9DCEA100B80EE4 /* CMTime.swift */; };
+		C59C11232C9DCEFE00B80EE4 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C11222C9DCEFD00B80EE4 /* Publisher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +34,14 @@
 		8C65F4FB2B2872A7004FB8A0 /* Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary.swift; sourceTree = "<group>"; };
 		8C65F4FD2B287C9E004FB8A0 /* SummaryModeToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryModeToggleStyle.swift; sourceTree = "<group>"; };
 		8C65F4FF2B287FA5004FB8A0 /* SummarySliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarySliderView.swift; sourceTree = "<group>"; };
+		C59C110C2C9D529F00B80EE4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		C59C110E2C9D546E00B80EE4 /* MediaControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaControlsView.swift; sourceTree = "<group>"; };
+		C59C11102C9D5B3600B80EE4 /* MediaPlayerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerClient.swift; sourceTree = "<group>"; };
+		C59C11122C9DB6E900B80EE4 /* SummaryAudioControlsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryAudioControlsFeature.swift; sourceTree = "<group>"; };
+		C59C11172C9DCC2F00B80EE4 /* SummaryAudioControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryAudioControlsView.swift; sourceTree = "<group>"; };
+		C59C111C2C9DCD3700B80EE4 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
+		C59C11202C9DCEA100B80EE4 /* CMTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMTime.swift; sourceTree = "<group>"; };
+		C59C11222C9DCEFD00B80EE4 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +75,12 @@
 		8C24CFF32B2785160061B63C /* BooksSummary */ = {
 			isa = PBXGroup;
 			children = (
+				C59C11142C9DCBBD00B80EE4 /* Entities */,
+				C59C111A2C9DCC8000B80EE4 /* Dependencies */,
+				C59C11152C9DCBE800B80EE4 /* Screens */,
 				8C24CFF42B2785160061B63C /* BooksSummaryApp.swift */,
-				8C65F4FB2B2872A7004FB8A0 /* Summary.swift */,
-				8C24CFF62B2785160061B63C /* SummaryView.swift */,
-				8C65F4FF2B287FA5004FB8A0 /* SummarySliderView.swift */,
-				8C65F4FD2B287C9E004FB8A0 /* SummaryModeToggleStyle.swift */,
-				8C24CFF82B2785180061B63C /* Assets.xcassets */,
+				C59C11192C9DCC6B00B80EE4 /* Reuse */,
+				C59C111E2C9DCDA600B80EE4 /* Resources */,
 				8C24CFFA2B2785180061B63C /* Preview Content */,
 			);
 			path = BooksSummary;
@@ -76,6 +92,78 @@
 				8C24CFFB2B2785180061B63C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C59C11142C9DCBBD00B80EE4 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				C59C110C2C9D529F00B80EE4 /* Book.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		C59C11152C9DCBE800B80EE4 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C59C11162C9DCBF300B80EE4 /* Summary */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		C59C11162C9DCBF300B80EE4 /* Summary */ = {
+			isa = PBXGroup;
+			children = (
+				8C65F4FB2B2872A7004FB8A0 /* Summary.swift */,
+				8C24CFF62B2785160061B63C /* SummaryView.swift */,
+				C59C11122C9DB6E900B80EE4 /* SummaryAudioControlsFeature.swift */,
+				C59C11172C9DCC2F00B80EE4 /* SummaryAudioControlsView.swift */,
+				8C65F4FF2B287FA5004FB8A0 /* SummarySliderView.swift */,
+				8C65F4FD2B287C9E004FB8A0 /* SummaryModeToggleStyle.swift */,
+			);
+			path = Summary;
+			sourceTree = "<group>";
+		};
+		C59C11192C9DCC6B00B80EE4 /* Reuse */ = {
+			isa = PBXGroup;
+			children = (
+				C59C111B2C9DCC9600B80EE4 /* UI */,
+				C59C111F2C9DCE8900B80EE4 /* Extensions */,
+			);
+			path = Reuse;
+			sourceTree = "<group>";
+		};
+		C59C111A2C9DCC8000B80EE4 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				C59C11102C9D5B3600B80EE4 /* MediaPlayerClient.swift */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		C59C111B2C9DCC9600B80EE4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C59C110E2C9D546E00B80EE4 /* MediaControlsView.swift */,
+				C59C111C2C9DCD3700B80EE4 /* SliderView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C59C111E2C9DCDA600B80EE4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8C24CFF82B2785180061B63C /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C59C111F2C9DCE8900B80EE4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C59C11202C9DCEA100B80EE4 /* CMTime.swift */,
+				C59C11222C9DCEFD00B80EE4 /* Publisher.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,10 +242,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C59C11182C9DCC2F00B80EE4 /* SummaryAudioControlsView.swift in Sources */,
+				C59C110F2C9D546E00B80EE4 /* MediaControlsView.swift in Sources */,
+				C59C11132C9DB6E900B80EE4 /* SummaryAudioControlsFeature.swift in Sources */,
 				8C24CFF72B2785160061B63C /* SummaryView.swift in Sources */,
+				C59C111D2C9DCD3700B80EE4 /* SliderView.swift in Sources */,
 				8C65F4FE2B287C9E004FB8A0 /* SummaryModeToggleStyle.swift in Sources */,
+				C59C11232C9DCEFE00B80EE4 /* Publisher.swift in Sources */,
+				C59C110D2C9D52A200B80EE4 /* Book.swift in Sources */,
 				8C65F4FC2B2872A7004FB8A0 /* Summary.swift in Sources */,
 				8C24CFF52B2785160061B63C /* BooksSummaryApp.swift in Sources */,
+				C59C11112C9D5B3600B80EE4 /* MediaPlayerClient.swift in Sources */,
+				C59C11212C9DCEA400B80EE4 /* CMTime.swift in Sources */,
 				8C65F5002B287FA5004FB8A0 /* SummarySliderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,7 +467,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.3;
+				minimumVersion = 1.9.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

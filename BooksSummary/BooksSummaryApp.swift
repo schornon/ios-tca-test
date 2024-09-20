@@ -14,7 +14,7 @@ struct BooksSummaryApp: App {
         WindowGroup {
             SummaryView(
                 store: Store(initialState: Summary.State(
-                    book: Fake.book)
+                    book: Book.mock)
                 ) {
                     Summary()
                 }
