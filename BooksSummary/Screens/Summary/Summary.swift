@@ -13,6 +13,17 @@ import CoreMedia
 struct Summary {
     struct State: Equatable {
         var book: Book
+        var subscriptionActive: Bool
+        
+        init(book: Book, subscriptionActive: Bool = false) {
+            self.book = book
+            self.subscriptionActive = subscriptionActive
+            if !subscriptionActive {
+                self.payment = .init()
+            }
+        }
+        
+        var payment: PaymentFeature.State?
         var bookCover: URL? {
             URL(string: book.coverPath)
         }
@@ -33,8 +44,10 @@ struct Summary {
         case loadKeyPoint
         case loadMedia(Media?)
         case autoplay(Bool)
-        case modeTapped
+        case onModeTap
+        case onBackTap
         case audioControls(SummaryAudioControlsFeature.Action)
+        case payment(PaymentFeature.Action)
     }
     
     var body: some Reducer<State, Action> {
@@ -71,9 +84,15 @@ struct Summary {
                 state.autoplay = value
                 return .none
 
-            case .modeTapped:
+            case .onModeTap:
                 state.isAudioMode.toggle()
                 return .none
+                
+            case .onBackTap:
+                return .run { send in
+                    await mediaPlayer.pause()
+                    await dismiss()
+                }
 
             case .audioControls(.prevKeyPoint):
                 let newIndex = state.keyPointIndex - 1
@@ -89,10 +108,23 @@ struct Summary {
                 }
                 return .send(.keyPointIndex(newIndex))
                 
+            case .payment(.finished):
+                state.subscriptionActive = true
+                return .none
+                
+            case .payment(.alert(.presented(.errorOK))):
+                return .send(.onBackTap)
+                
             case .audioControls:
                 return .none
                 
+            case .payment:
+                return .none
+                
             }
+        }
+        .ifLet(\.payment, action: \.payment) {
+            PaymentFeature()
         }
         
         Scope(state: \.audioControls, action: \.audioControls) {
@@ -102,6 +134,7 @@ struct Summary {
     
     typealias Media = MediaPlayerClient.Media
     @Dependency(\.mediaPlayer) var mediaPlayer
+    @Dependency(\.dismiss) var dismiss
 }
 
 

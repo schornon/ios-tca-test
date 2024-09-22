@@ -12,11 +12,8 @@ import ComposableArchitecture
 struct BooksSummaryApp: App {
     var body: some Scene {
         WindowGroup {
-            SummaryView(
-                store: Store(initialState: Summary.State(
-                    book: Book.mock)
-                ) {
-                    Summary()
+            RootView(store: Store(initialState: RootFeature.State()) {
+                    RootFeature()
                 }
             )
         }

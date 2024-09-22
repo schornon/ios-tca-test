@@ -19,6 +19,13 @@ struct SummaryView: View {
     
     var body: some View {
         content
+            .overlay {
+                IfLetStore(store.scope(state: \.payment, action: \.payment)) { store in
+                    PaymentView(store: store)
+                        .animation(.easeInOut, value: viewStore.subscriptionActive)
+                        .offset(y: viewStore.subscriptionActive ? 500 : 0)
+                }
+            }
             .onAppear {
                 store.send(.onAppear)
             }
@@ -27,6 +34,7 @@ struct SummaryView: View {
     var content: some View {
         VStack(spacing: 26) {
             bookCover
+                .frame(width: 220, height: 320)
             
             VStack(spacing: 8) {
                 let index = viewStore.keyPointIndex
@@ -37,10 +45,10 @@ struct SummaryView: View {
                 Text(viewStore.keyPoint.shortText)
                     .font(.system(size: 14, weight: .regular))
                     .multilineTextAlignment(.center)
+                    .frame(maxHeight: .infinity, alignment: .top)
             }
             .padding(.horizontal)
-            
-            Spacer()
+            .layoutPriority(100)
             
             SummaryAudioControlsView(
                 store: store.scope(state: \.audioControls, action: \.audioControls)
@@ -48,17 +56,26 @@ struct SummaryView: View {
             
             Toggle(
                 "",
-                isOn: viewStore.binding(get: \.isAudioMode, send: .modeTapped)
+                isOn: viewStore.binding(get: \.isAudioMode, send: .onModeTap)
             )
             .toggleStyle(SummaryModeToggleStyle())
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.top, 40)
         .padding(.horizontal)
-        .padding(.vertical, 30)
+        .padding(.bottom)
         .background(
             Color.milkBackground
         )
+        .overlay(alignment: .topLeading) {
+            Button(action: { store.send(.onBackTap) }) {
+                Image(systemName: "xmark")
+                    .font(.title2)
+                    .foregroundStyle(.black)
+                    .padding()
+            }
+        }
     }
     
     var bookCover: some View {
@@ -71,16 +88,18 @@ struct SummaryView: View {
             },
             placeholder: {
                 Color.black.opacity(0.1)
+                    .overlay {
+                        ProgressView()
+                    }
             }
         )
-        .frame(width: 220, height: 340)
     }
 }
 
 #Preview {
     SummaryView(
         store: Store(initialState: Summary.State(
-            book: Book.mock)
+            book: Book.mock, subscriptionActive: true)
         ) {
             Summary()
         }
