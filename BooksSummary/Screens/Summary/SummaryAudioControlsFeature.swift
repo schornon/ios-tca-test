@@ -130,10 +130,10 @@ struct SummaryAudioControlsFeature {
                 return .send(.seekPlayerTo(time))
                 
             case .backwardAction:
-                return .send(.seekPlayerBy(-15))
+                return .send(.seekPlayerBy(-5))
                 
             case .forwardAction:
-                return .send(.seekPlayerBy(15))
+                return .send(.seekPlayerBy(10))
                 
             case .prevKeyPoint:
                 return .none

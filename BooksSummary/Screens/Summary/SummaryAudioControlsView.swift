@@ -36,9 +36,9 @@ struct SummaryAudioControlsView: View {
             MediaControlsView(
                 isPlaying: viewStore.isPlaying,
                 prevKeyPoint: { store.send(.prevKeyPoint) },
-                seekBack: { store.send(.seekPlayerBy(-5)) },
+                seekBack: { store.send(.backwardAction) },
                 playPause: { store.send(.playPause, animation: nil) },
-                seekForward: { store.send(.seekPlayerBy(10)) },
+                seekForward: { store.send(.forwardAction) },
                 nextKeyPoint: { store.send(.nextKeyPoint) }
             )
         }
