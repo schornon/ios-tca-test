@@ -51,7 +51,6 @@ struct SummaryAudioControlsFeature {
                 let playerStatusStream = mediaPlayer.playerTimeControlStatus()
                 let itemDidPlayToEndStream = mediaPlayer.itemDidPlayToEndTime()
                 let currentItemStream = mediaPlayer.currentItem()
-                let currentTimeStream = mediaPlayer.currentTime()
 
                 return .run { send in
                     await withTaskGroup(of: Void.self) { taskGroup in
@@ -75,8 +74,15 @@ struct SummaryAudioControlsFeature {
                         }
                         
                         taskGroup.addTask {
-                            for await currentTime in currentTimeStream {
+                            for await currentTime in await mediaPlayer.currentTime() {
+                                print(currentTime)
                                 await send(.mediaCurrentTime(currentTime), animation: .linear(duration: 0.1))
+                            }
+                        }
+                        
+                        taskGroup.addTask {
+                            for await playbackSpeed in await mediaPlayer.playbackRateStream() {
+                                print(playbackSpeed)
                             }
                         }
                         

@@ -27,13 +27,13 @@ struct MediaPlayerClient {
     var pause: @Sendable () async -> Void
     var playbackRate: @Sendable () async -> PlaybackRate = { .x100 }
     var setPlaybackRate: @Sendable (PlaybackRate) async -> Void
-    var playbackRateStream: @Sendable () -> AsyncStream<PlaybackRate> = { .finished }
+    var playbackRateStream: @Sendable () async -> AsyncStream<PlaybackRate> = { .finished }
     var seekBy: @Sendable (_ seconds: CMTimeValue) async -> Void
     var seekTo: @Sendable (_ time: CMTime) async -> Void
     var playerTimeControlStatus: @Sendable () -> AsyncStream<AVPlayer.TimeControlStatus> = { .finished }
     var itemDidPlayToEndTime: @Sendable () -> AsyncStream<Void> = { .finished }
     var currentItem: @Sendable () -> AsyncStream<AVPlayerItem?> = { .finished }
-    var currentTime: @Sendable () -> AsyncStream<CMTime> = { .finished }
+    var currentTime: @Sendable () async -> AsyncStream<CMTime> = { .finished }
     
     struct Media: Hashable {
         let url: URL
@@ -58,7 +58,7 @@ extension MediaPlayerClient: DependencyKey {
                 await actor.pause()
             },
             playbackRate: {
-                actor.playbackRate.value
+                actor.playbackRate
             },
             setPlaybackRate: { rate in
                 actor.setPlaybackRate(rate)
@@ -89,11 +89,13 @@ extension MediaPlayerClient: DependencyKey {
     
     private actor MediaPlayerActor {
         let player: AVPlayer
-        let playbackRate: CurrentValueSubject<PlaybackRate, Never>
+
+        var playbackRate: PlaybackRate
+        private var playbackRateContinuation: AsyncStream<PlaybackRate>.Continuation?
         
         init() {
             self.player = AVPlayer()
-            self.playbackRate = CurrentValueSubject(.x100)
+            self.playbackRate = .x100
         }
         
         @MainActor
@@ -108,7 +110,7 @@ extension MediaPlayerClient: DependencyKey {
         }
         
         func play() async {
-            player.rate = playbackRate.value.rawValue
+            player.rate = playbackRate.rawValue
         }
         
         func pause() async {
@@ -116,7 +118,8 @@ extension MediaPlayerClient: DependencyKey {
         }
         
         func setPlaybackRate(_ rate: PlaybackRate) {
-            playbackRate.send(rate)
+            playbackRate = rate
+            playbackRateContinuation?.yield(rate)
             if player.timeControlStatus == .playing {
                 player.rate = rate.rawValue
             }
@@ -132,7 +135,6 @@ extension MediaPlayerClient: DependencyKey {
             player.seek(to: newTime, toleranceBefore: .positiveInfinity, toleranceAfter: .positiveInfinity)
         }
         
-        nonisolated
         func currentTimeStream() -> AsyncStream<CMTime> {
             AsyncStream { continuation in
                 let interval = CMTime(value: 1, timescale: 10)
@@ -147,9 +149,10 @@ extension MediaPlayerClient: DependencyKey {
             }
         }
         
-        nonisolated
         func playbackRateStream() -> AsyncStream<PlaybackRate> {
-            AsyncStream(playbackRate.values)
+            AsyncStream { continuation in
+                playbackRateContinuation = continuation
+            }
         }
     }
 }
