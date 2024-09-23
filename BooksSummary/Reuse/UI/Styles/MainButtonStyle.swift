@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainButtonStyle: ButtonStyle {
     
-    var height: CGFloat = 50
+    var height: CGFloat = 60
     
     @Environment(\.isEnabled) var isEnabled
     

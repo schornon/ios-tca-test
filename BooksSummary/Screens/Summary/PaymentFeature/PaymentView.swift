@@ -60,7 +60,7 @@ struct PaymentView: View {
     
     var loadingView: some View {
         Color.clear
-            .frame(height: 50)
+            .frame(height: 60)
             .overlay {
                 ProgressView()
             }

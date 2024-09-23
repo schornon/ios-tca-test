@@ -104,7 +104,10 @@ struct Summary {
             case .audioControls(.nextKeyPoint):
                 let newIndex = state.keyPointIndex + 1
                 guard state.book.keyPoints.indices.contains(newIndex) else {
-                    return .send(.audioControls(.seekPlayerTo(.zero)))
+                    return .run { send in
+                        await send(.audioControls(.isPlaying(false)))
+                        await send(.audioControls(.seekPlayerTo(.zero)))
+                    }
                 }
                 return .send(.keyPointIndex(newIndex))
                 

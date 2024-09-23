@@ -62,7 +62,7 @@ struct SummaryView: View {
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.top, 40)
+        .padding(.top, 50)
         .padding(.horizontal)
         .padding(.bottom)
         .background(

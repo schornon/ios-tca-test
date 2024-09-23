@@ -50,7 +50,7 @@ extension StoreClient: DependencyKey {
             let bundleID = "com.cs.BooksSummary"
             let productIDs = [
                 "\(bundleID).product.subscription.year"]
-            var products = try await Product.products(for: productIDs)
+            let products = try await Product.products(for: productIDs)
             return products
         }
         
